@@ -20,8 +20,7 @@ func sensorPutPath(rg *gin.RouterGroup) {
 	currentTime := time.Now()
 
 	//Handler for posting data into database
-	//Currently works as 'GET' but not 'POST'
-	sensor.GET("/:id", func(c *gin.Context) {
+	sensor.POST("/:id", func(c *gin.Context) {
 		id := c.Param("id")
 		s1 := Sensor{32.45,id, currentTime.Format("01-02-2006 15:04:05 Mon")}
 		c.JSON(http.StatusOK, s1)
@@ -35,7 +34,7 @@ func sensorPutPath(rg *gin.RouterGroup) {
 			VALUES ($1, $2, $3) RETURNING sensorid`
 
 		//Executes insert statement, expects one row for return value
-		err := db.QueryRow(sqlStatement, "a1", "01-02-2006 15:04:05 Mon", 2345).Scan(&id)
+		err := db.QueryRow(sqlStatement, "b1", "01-02-2006 15:04:05 Mon", 2345).Scan(&id)
 
 		fmt.Println("New record ID is:", id)
 
