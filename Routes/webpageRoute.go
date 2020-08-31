@@ -38,6 +38,6 @@ func HtmlPage() {
 	println("Inside HtmlPage func")
 	http.HandleFunc("/", sensorDataHandler)
 	println("Created Path")
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":8000", nil)
 	println("Exiting func")
 }

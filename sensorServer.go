@@ -6,6 +6,5 @@ import (
 
 //Starts running sensor program
 func main() {
-	Routes.HtmlPage()
-	//Routes.Run()
+	Routes.Run()
 }

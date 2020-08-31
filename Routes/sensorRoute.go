@@ -29,11 +29,10 @@ func sensorPutPath(rg *gin.RouterGroup) {
 		var s1 Sensor
 		//Calls func to open db connection
 		db := DBConn()
-		println("We returned GET")
+
 		//Selects an entire row from db
 		//$1 is replaced by requested id
 		sqlGet := `SELECT * FROM sensordata WHERE sensorid = $1`
-		println(sqlGet)
 		fmt.Printf("%s\n", id)
 		//Executes sql statement based on id
 		row := db.QueryRow(sqlGet, id)
