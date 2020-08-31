@@ -20,4 +20,3 @@ func handleRoutes() {
 	r1 := router.Group("/r1")
 	sensorPutPath(r1)
 }
-

@@ -9,10 +9,10 @@ import (
 //Postgres DB details
 //Currently local
 const (
-	host     = "localhost"
+	host     = "34.106.182.242"
 	port     = 5432
-	user     = "thomasrasmussen"
-	password = "Colorado@Boulder15"
+	user     = "postgres"
+	password = "Colorado@Boulder20"
 	dbname   = "firesensor"
 )
 
@@ -26,12 +26,12 @@ func DBConn() *sql.DB {
 
 	//Creates connection
 	db, err := sql.Open("postgres", psqlInfo)
+
 	if err != nil {
 		panic(err)
 	}
 
 	fmt.Println("Successfully connected!")
-
 	return db
 }
 
