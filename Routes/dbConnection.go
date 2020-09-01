@@ -7,7 +7,6 @@ import (
 	_ "github.com/lib/pq"
 )
 //Postgres DB details
-//Currently local
 const (
 	host     = "34.106.182.242"
 	port     = 5432

@@ -13,12 +13,28 @@ type SensorData struct {
 }
 
 func sensorDataHandler(w http.ResponseWriter, r *http.Request) {
-	println("Inside sensorDataHandler func")
 
-	pd := SensorData {
-		Airquality: 23.45,
-		Id:         "k5",
-		Timestamp:  "tomorrow",
+	db := DBConn()
+	i := 0
+	var S1 [4]SensorData
+
+	sqlGet := `SELECT * FROM sensordata`
+	rows, err := db.Query(sqlGet)
+	if err != nil {
+		panic(err)
+	}
+
+	defer rows.Close()
+
+	for rows.Next() {
+		err = rows.Scan(&S1[i].Id, &S1[i].Timestamp, &S1[i].Airquality)
+
+		if err != nil {
+			panic(err)
+		}
+
+		i++
+
 	}
 
 	t, err := template.ParseFiles("Pages/showData.html")
@@ -27,17 +43,17 @@ func sensorDataHandler(w http.ResponseWriter, r *http.Request) {
 		log.Print("template parsing error: ", err) // log it
 	}
 
-	err = t.Execute(w, pd)
+	err = t.Execute(w, S1)
 
 	if err != nil { // if there is an error
 		log.Print("template executing error: ", err) //log it
 	}
+
+	DBClose(db)
 }
 
 func HtmlPage() {
-	println("Inside HtmlPage func")
 	http.HandleFunc("/", sensorDataHandler)
-	println("Created Path")
 	http.ListenAndServe(":8000", nil)
-	println("Exiting func")
+
 }
